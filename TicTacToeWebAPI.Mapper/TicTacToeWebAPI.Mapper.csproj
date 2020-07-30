@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToeWebAPI.Boundaries\TicTacToeWebAPI.Boundaries.csproj" />
+    <ProjectReference Include="..\TicTacToeWebAPI.Services\TicTacToeWebAPI.Services.csproj" />
+    <ProjectReference Include="..\TicTacToeWebAPI.Utils\TicTacToeWebAPI.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

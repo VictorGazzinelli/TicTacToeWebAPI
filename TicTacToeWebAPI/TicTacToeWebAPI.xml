@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicTacToeWebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:TicTacToeWebAPI.Controllers.GameController.CreateGame">
+            <summary>
+            Creates a new game
+            </summary>
+            <response code="200"> Returns the newly created game </response>
+        </member>
+        <member name="M:TicTacToeWebAPI.Controllers.GameController.CreateMovement(TicTacToeWebAPI.Models.Game.CreateMovementInput)">
+            <summary>
+            Creates a new movement in a game with given id
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST game/{id}/movement
+                {        
+                  "id": "fbf7d720-df90-48c4-91f7-9462deafefb8",
+                  "player": "X",
+                  "position": {
+                      "x": 0,
+                      "y": 1
+                  }
+                }
+                
+            </remarks>
+            <response code="200">
+            The movement is valid and will return 200 status code
+            </response>
+            <response code="400">
+            The movement is invalid and will return 400 status code with a message saying what bad was found in the request 
+            </response>
+        </member>
+    </members>
+</doc>
