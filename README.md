@@ -1,41 +1,38 @@
 # Tic Tac Toe API
 
->Uma API que provem endpoints para um cliente fictício contando com uma plataforma de Jogo da velha
+> An API with endpoints to a fake client reproducing a tic-tac-toe game platform
 
->Code Reviews são muito bem-vindos! :)
+>Code Reviews very welcome! :)
 
-## Observações
+## Notes
 
-- O projeto foi feito em .NET Core 3.1.6 
-- O build foi otimizado para ser um web deploy podendo ser hospedado via WebDeploy
-- Foi utilizado uma lista estática para armazenar objetos em memória "simulando" um acesso a banco de dados
-- Apesar de desnecessário devido a simplicidade da API, levei em consideração adotar alguns padrões de arquitetura SOLID e REST
-- Padrões de projeto tornaram a API mais modular e dão maior longevidade ao código
-- Foi utilizado da pratica de TDD para o desenvolvimento dos enpoints.
+- The project was made using .NET Core 3.1.6 
+- I used a static list in order to store objects in memory "simulating" a database access
+- I will be trying to adapt the API using REST, SOLID and CLEAN architectures.
+- Let me know if there is any other pattern that I can use
+- I'm also trying to use the TDD method( Red -> Green -> Refactor)
 
 
-## Instalalação e Testes
+## Install and Tests
 
 ```cmd
-# Para rodar o projeto principal:
+# Running main project
 dotnet run --project "TicTacToeWebAPI"
 
-# Para buildar o projeto principal:
+# building main project
 dotnet build 
 
-# Para visualizar os testes de aceitação da API:
+# List acceptance tests for the API
 dotnet test --list-tests
 
-# Para rodar o modulo de testes de aceitação da API:
+# Running API Tests
 dotnet test
 
 ```
-
-Você pode também testar as requests pelo Swagger na url localhost:5000 !
-
+You can also test request through Swagger in localhost:5000 !
 
 
-## Dependencias
+## Dependencies
 
 ```
 O projeto 'TicTacToeWebAPI' tem as seguintes referências de pacote
@@ -73,31 +70,19 @@ O projeto 'TicTacToeWebAPI.Tests' tem as seguintes referências de pacote
 ```
 
 
-## Enunciado Geral
+## General Information
 
-O objetivo deste projeto é desenvolver uma __API__ para um jogo multiplayer de **Jogo da Velha**.
+The goal of this project is to develop an API for a multiplayer game of Tic-Tac-Toe
 
-## Premissas
+## Details
 
-- Poderá ser feito em qualquer linguagem;
-- Deverá conter um README com instruções claras de build e dependências;
-- Build automatizado é opcional mas desejável;
-- Não pode haver dependência de banco de dados ou serviços externos. A persistência dos dados pode
-ser feita por exemplo in-memory ou baseada em arquivos;
-- Não é necessária preocupação com autenticação dos métodos;
-- __Será avaliado além do funcionamento da API boas práticas de desenvolvimento de software.__
-
-## Detalhes
-
-A api deverá conter os métodos abaixo. O funcionamento da partida será baseado em turnos, a cada
-momento um jogador realiza a jogada.
+The API must consist of all methods listed below.
 
 ## POST - /game
 
-Essa chamada criara uma nova partida e retornará o id da partida criada. Além do id ele vai sortear qual
-jogador ira começar a partida o "X" ou o "O".
+This endpoint must create a new game, returning the game id and the first player that wil be chosen randomly (X or O)
 
-Exemplo de retorno:
+Example of the Data Transfer Object:
 
 ```
 {
@@ -107,7 +92,7 @@ Exemplo de retorno:
 ```
 ## POST - /game/{id}/movement
 
-Essa chamada fará o movimento de cada jogador.
+This call will register the player's movement.
 
 Input:
 
@@ -122,9 +107,8 @@ Input:
 }
 ```
 
-
-As coordenadas X e Y representam a posição no tabuleiro do movimento. Começando do índice 0, no canto
-inferior esquerdo. De forma que o tabuleiro fica assim:
+The X and Y coordinates represent the position of the movement in the board. starting on the index 0 in the bottom left corner,
+like so:
 
 ```
 (x=0 y=2) | (x=1 y=2) | (x=2 y=2)
@@ -133,7 +117,7 @@ inferior esquerdo. De forma que o tabuleiro fica assim:
 ----------|-----------|----------
 (x=0 y=0) | (x=1 y=0) | (x=2 y=0)
 ```
-O player representa o jogador que está fazendo a jogada. Esse input por exemplo criaria a jogada abaixo:
+The player represents who is doing the movement. The input above for instance, would create the below movement:
 
 ```
           |           | 
@@ -143,13 +127,13 @@ O player representa o jogador que está fazendo a jogada. Esse input por exemplo
           |           | 
 ```
 
-Caso a jogada seja feita com sucesso o código 200 deve ser retornado.
+In case of the movement was able to be played, the code 200 must be returned.
 
-Caso não seja o turno do jogador, ou a partida não exista, um erro deve ser retornado.
+In case of the movement was not able to be played, an error must be returned.
 
-Retorno:
+ReturnValues:
 
-**Turno Errado**
+**Wrong Turn**
 
 ```
 {
@@ -157,15 +141,15 @@ Retorno:
 }
 ```
 
-**Partida Inexistente**
+**Game Not Found**
 
 ```
 {
     "msg": "Partida não encontrada"
 }
 ```
-Finalmente se o jogo chegar ao fim o retorno deve ser assim:
 
+Finnaly, if the game reaches its end, the return value must be:
 
 ```
 {
@@ -173,8 +157,8 @@ Finalmente se o jogo chegar ao fim o retorno deve ser assim:
     "winner": "X"
 }
 ```
-Se o jogo deu **velha** (empate), o campo jogador ganhador deve vir preenchido da seguinte forma:
 
+If the game reaches a Draw, the 'player' attribute must be filled like so:
 
 ```
 {
